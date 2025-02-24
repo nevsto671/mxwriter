@@ -1,0 +1,10 @@
+<script src="<?php echo $this->url('assets/js/jquery.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/bootstrap.bundle.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/quill.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/drawdown.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/clipboard.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/simplebar.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/autosize.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/lightbox.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/prism.min.js'); ?>"></script>
+<script src="<?php echo $this->url('assets/js/app.js'); ?>"></script>

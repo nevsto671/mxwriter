@@ -1,0 +1,37 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+## Begin - Redirect HTTPS
+#RewriteCond %{HTTPS} off
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+## End - Redirect HTTPS
+
+# RewriteBase /
+## Begin - Exploits
+RewriteCond %{REQUEST_URI} ({{|}}|{%|%}) [OR]
+RewriteCond %{QUERY_STRING} ({{|}}|{%25|%25}) [OR]
+RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule .* index.php [F]
+## End - Exploits
+
+## Begin - Index
+RewriteCond %{REQUEST_URI} !^/index\.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L]
+## End - Index
+
+## Begin - Security
+RewriteRule ^(app)/(.*) index.php [L]
+#RewriteRule (^|/)\.(?!well-known) - [F]
+#RewriteRule ^(\.htaccess)$ error [F]
+## End - Security
+</IfModule>
+
+# Begin - Default Resources
+Options -Indexes
+DirectoryIndex index.php index.html index.htm
+# End - Default Resources
